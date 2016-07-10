@@ -10,5 +10,15 @@ package br.unesp.rc.lcp.FaceFood.Domain;
  * @author augustochaves
  */
 public enum EFormaDePagamento {
-    Dinheiro, Cartao
+    Dinheiro(0), Cartao(1);
+    
+    private final int value;
+    
+    private EFormaDePagamento(int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return value;
+    }
 }
