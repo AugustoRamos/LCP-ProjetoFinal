@@ -32,17 +32,97 @@ public class DadosProduto extends AcessoBanco<Produto>{
 
     @Override
     public boolean salvar(Produto objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        boolean retorno = false;
+        
+        String query = "INSERT INTO Produtos (Nome, PrecoDeCusto, PrecoDeVenda, QuantidadeEstoque, CodigoDeBarras, QuantidadeMinimaEstoque) "
+                + "VALUES (?, ?, ?, ?, '', ?)";
+     
+        try{
+        
+            PreparedStatement stmt = Conexao.getConnection().prepareStatement(query);
+
+            stmt.setString(1, objeto.getNome());
+            stmt.setFloat(2, objeto.getPrecoDeCusto());
+            stmt.setFloat(3, objeto.getPrecoDeVenda());
+            stmt.setInt(4, objeto.getQuantidadeEstoque());
+            stmt.setInt(5, objeto.getQuantidadeMinimaEstoque());
+
+            stmt.execute();
+            stmt.close();
+            
+            retorno = true;
+           }
+        catch(SQLException ex){
+            System.out.println("Erro na instrução SQL" + ex.getMessage());
+        }
+        
+        return retorno;
     }
 
     @Override
     public Produto buscar(Integer codigo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Produto retorno = null;
+        
+        String query = "SELECT Id, Nome, PrecoDeCusto, PrecoDeVenda, QuantidadeEstoque, CodigoDeBarras, QuantidadeMinimaEstoque FROM Produtos "
+                + "WHERE Id = ?";
+        try{
+            PreparedStatement stmt = Conexao.getConnection().prepareStatement(query);
+           
+            stmt.setInt(1, codigo);
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+
+                retorno = new Produto();
+                
+                retorno.setCodigo(rs.getInt("Id"));
+                retorno.setNome(rs.getString("Nome"));
+                retorno.setPrecoDeCusto(rs.getFloat("PrecoDeCusto"));
+                retorno.setPrecoDeVenda(rs.getFloat("PrecoDeVenda"));
+                retorno.setQuantidadeEstoque(rs.getInt("QuantidadeEstoque"));
+                retorno.setCodigoDeBarras(rs.getString("CodigoDeBarras"));
+                retorno.setQuantidadeMinimaEstoque(rs.getInt("QuantidadeMinimaEstoque"));
+            }
+            
+            stmt.close();
+           }
+         catch(SQLException ex){
+             System.out.println("Erro na instrução SQL" + ex.getMessage());
+         }    
+        
+        return retorno;
     }
 
     @Override
     public boolean alterar(Produto objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean retorno = false;
+        
+        String query = "UPDATE Produtos SET Nome = ?, PrecoDeCusto = ?, PrecoDeVenda = ?, QuantidadeEstoque = ?, QuantidadeMinimaEstoque = ? "
+                + "WHERE Id = ?";
+     
+        try{
+        
+            PreparedStatement stmt = Conexao.getConnection().prepareStatement(query);
+
+            stmt.setString(1, objeto.getNome());
+            stmt.setFloat(2, objeto.getPrecoDeCusto());
+            stmt.setFloat(3, objeto.getPrecoDeVenda());
+            stmt.setInt(4, objeto.getQuantidadeEstoque());
+            stmt.setInt(5, objeto.getQuantidadeMinimaEstoque());
+            stmt.setInt(6, objeto.getCodigo());
+
+            stmt.execute();
+            stmt.close();
+            
+            retorno = true;
+           }
+        catch(SQLException ex){
+            System.out.println("Erro na instrução SQL" + ex.getMessage());
+        }
+        
+        return retorno;
     }
 
     @Override
@@ -55,7 +135,7 @@ public class DadosProduto extends AcessoBanco<Produto>{
         
         List<Produto> retorno = new ArrayList<Produto>();
         
-        String query = "SELECT Id, Nome, PrecoDeCusto, PrecoDeVenda, QuantidadeEstoque, CodigoDeBarras, QuantidadeMinimaEstoque FROM produtos";
+        String query = "SELECT Id, Nome, PrecoDeCusto, PrecoDeVenda, QuantidadeEstoque, CodigoDeBarras, QuantidadeMinimaEstoque FROM Produtos";
         try{
             PreparedStatement stmt = Conexao.getConnection().prepareStatement(query);
            

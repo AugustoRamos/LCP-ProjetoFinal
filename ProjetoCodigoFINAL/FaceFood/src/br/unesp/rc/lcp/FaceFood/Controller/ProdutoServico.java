@@ -30,27 +30,17 @@ public class ProdutoServico {
     
     public boolean salvar(Produto objeto)
     {
-        return true;
+        return DadosProduto.getServico().salvar(objeto);
     }
     
     public Produto buscar(Integer codigo)
     {
-        Produto y = new Produto();
-        
-        y.setCodigo(codigo);
-        y.setCodigoDeBarras("codigobarras_" + codigo);
-        y.setNome("produto_" + codigo);
-        y.setPrecoDeCusto(codigo*5);
-        y.setPrecoDeVenda(codigo*7);
-        y.setQuantidadeEstoque(codigo*2);
-        y.setQuantidadeMinimaEstoque(codigo);
-
-        return y;
+        return DadosProduto.getServico().buscar(codigo);
     }
     
     public boolean alterar(Produto objeto)
     {
-        return true;
+        return DadosProduto.getServico().alterar(objeto);
     }
     
     public boolean excluir(Produto objeto)

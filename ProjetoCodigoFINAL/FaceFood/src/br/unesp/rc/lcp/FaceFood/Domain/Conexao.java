@@ -18,7 +18,7 @@ public class Conexao {
     public static Connection getConnection(){
         Connection conexao = null;
         String usuario = "root";
-        String senha = "teste";
+        String senha = "admin112358";
         String urlDB = "jdbc:mysql://localhost/FaceFood";
         
         try{

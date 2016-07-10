@@ -81,6 +81,7 @@ public class Principal extends javax.swing.JFrame {
                 break;
             case 4: 
                 jPanel1.add(cadastroProdutos, x); 
+                cadastroProdutos.IniciaTela();
                 cadastroProdutos.setVisible(true);
                 break;
         }
