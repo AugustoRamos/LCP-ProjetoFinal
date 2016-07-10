@@ -78,7 +78,7 @@ public class NovaVenda extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null}
             },
             new String [] {
                 "", "Quantidade", "Preço"
@@ -88,7 +88,7 @@ public class NovaVenda extends javax.swing.JPanel {
                 java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -97,6 +97,11 @@ public class NovaVenda extends javax.swing.JPanel {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTable1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jTable1PropertyChange(evt);
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -242,6 +247,10 @@ public class NovaVenda extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         fecharVenda(EFormaDePagamento.Dinheiro);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTable1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTable1PropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1PropertyChange
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

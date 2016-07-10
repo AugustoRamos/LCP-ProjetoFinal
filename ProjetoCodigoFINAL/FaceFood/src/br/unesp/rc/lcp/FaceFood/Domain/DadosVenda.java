@@ -9,6 +9,8 @@ import br.unesp.rc.lcp.FaceFood.beans.Venda;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -33,12 +35,11 @@ public class DadosVenda extends AcessoBanco<Venda>{
     @Override
     public boolean salvar(Venda objeto) {
         String queryVenda = "Insert into Vendas(FormaPagamento, Preco, Data)"+
-             "values(?, ?, ?)";    
-        
+             "values(?, ?, ?)";           
                 
         try{
         
-            PreparedStatement stmt = Conexao.getConnection().prepareStatement(queryVenda);
+            PreparedStatement stmt = Conexao.getConnection().prepareStatement(queryVenda, Statement.RETURN_GENERATED_KEYS);
             
             java.util.Date utilDate = objeto.getData();
             java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
@@ -110,7 +111,8 @@ public class DadosVenda extends AcessoBanco<Venda>{
     }
 
     @Override
-    public List<Venda> buscarTodos() {
+    public List<Venda> buscarTodos() {        
+        
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

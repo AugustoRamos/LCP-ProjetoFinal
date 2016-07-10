@@ -16,6 +16,8 @@ import java.util.Map;
  */
 public class Venda {
     
+    private int codigo;
+    
     private Map<Integer, Float> produtosComprados = new HashMap<Integer, Float>();
     
     private EFormaDePagamento formaPagamento;
@@ -78,5 +80,19 @@ public class Venda {
      */
     public void setData(Date data) {
         this.data = data;
+    }
+
+    /**
+     * @return the codigo
+     */
+    public int getCodigo() {
+        return codigo;
+    }
+
+    /**
+     * @param codigo the codigo to set
+     */
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 }

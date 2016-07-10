@@ -42,7 +42,9 @@ public class VendaServico {
             
             if (produto != null)
                 produto.setQuantidadeEstoque(produto.getQuantidadeEstoque() - 1);            
-        }    
+        }   
+        
+        DadosVenda.getServico().salvar(objeto);
         
         return true;
     }
